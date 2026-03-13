@@ -1,9 +1,6 @@
 function errorHandler(erro, req, res, _next) {
-    const isDev = process.env.NODE_ENV === 'development';
-
-    if (isDev) {
-        console.error(`[ERRO] ${req.method} ${req.originalUrl}:`, erro.message);
-    }
+    console.error(`[ERRO] ${req.method} ${req.originalUrl}:`, erro.message);
+    console.error(erro.stack);
 
     if (erro.name === 'ValidationError') {
         const mensagens = Object.values(erro.errors).map(e => e.message);
