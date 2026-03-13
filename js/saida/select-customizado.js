@@ -1,6 +1,6 @@
 const ICONES_MOTIVO = {
     'Venda':                 'point_of_sale',
-    'Devolução Fornecedor':  'assignment_return',
+    'Devolução ao Fornecedor': 'assignment_return',
     'Perda/Avaria':          'report_problem',
     'Uso Interno':           'home_work',
     'Outro':                 'more_horiz'

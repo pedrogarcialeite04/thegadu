@@ -24,9 +24,9 @@ export async function removerProduto(codigo) {
     }
 }
 
-export async function removerSaida(indice) {
+export async function removerSaida(id) {
     const listaSaidas = obterSaidas();
-    const saida = listaSaidas[indice];
+    const saida = listaSaidas.find(s => s._id === id);
     if (!saida) return;
 
     const confirmado = await mostrarConfirmacao(
@@ -36,7 +36,7 @@ export async function removerSaida(indice) {
 
     if (confirmado) {
         try {
-            await excluirSaidaAPI(saida._id);
+            await excluirSaidaAPI(id);
             await desenharTabelaSaidas();
             mostrarNotificacao('Registro de saída excluído', 'erro');
         } catch (erro) {

@@ -1,66 +1,33 @@
 export function iniciarAnimacoes() {
-    if (typeof gsap === 'undefined') return;
-
-    if (typeof ScrollTrigger !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
-    }
-
     animarEntradaPagina();
     configurarMicroInteracoes();
 }
 
 function animarEntradaPagina() {
-    const tl = gsap.timeline({
-        defaults: { ease: 'power3.out', duration: 0.35 }
+    const elementosAnimados = [
+        '.menu-lateral',
+        '.cabecalho-mobile',
+        '.logo3d-container',
+        '.menu-lateral__botao',
+        '.cartao-resumo',
+        '.pagina__cabecalho > div',
+        '.pagina__icone',
+        '.formulario',
+        '.cartao-tabela'
+    ];
+
+    elementosAnimados.forEach((seletor, i) => {
+        document.querySelectorAll(seletor).forEach((el, j) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(16px)';
+
+            requestAnimationFrame(() => {
+                el.style.transition = `opacity 0.35s ease-out ${(i + j) * 60}ms, transform 0.35s ease-out ${(i + j) * 60}ms`;
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+        });
     });
-
-    const eMobile = window.innerWidth <= 768;
-
-    if (eMobile) {
-        tl.from('.cabecalho-mobile', { y: -30, opacity: 0, duration: 0.25 });
-    } else {
-        tl.from('.menu-lateral', { x: -40, opacity: 0, duration: 0.3 });
-    }
-
-    tl.from('.logo3d-container', {
-        scale: 0.8, opacity: 0, duration: 0.3, ease: 'back.out(1.5)'
-    }, '-=0.15');
-
-    tl.from('.menu-lateral__botao', {
-        y: 15, opacity: 0, stagger: 0.04, duration: 0.2
-    }, '-=0.15');
-
-    tl.from('.cartao-resumo', {
-        y: 15, opacity: 0, stagger: 0.05, duration: 0.2
-    }, '-=0.1');
-
-    const paginaAtiva = document.querySelector('.pagina.ativo');
-    if (paginaAtiva) {
-        animarElementosPagina(tl, paginaAtiva);
-    }
-}
-
-function animarElementosPagina(tl, pagina) {
-    const cabecalhoTexto = pagina.querySelector('.pagina__cabecalho > div');
-    const icone = pagina.querySelector('.pagina__icone');
-    const formulario = pagina.querySelector('.formulario');
-    const cartaoTabela = pagina.querySelector('.cartao-tabela');
-
-    if (cabecalhoTexto) {
-        tl.from(cabecalhoTexto, { y: 15, opacity: 0, duration: 0.2 }, '-=0.05');
-    }
-
-    if (icone) {
-        tl.from(icone, { scale: 0.6, opacity: 0, duration: 0.25, ease: 'back.out(2)' }, '-=0.1');
-    }
-
-    if (formulario) {
-        tl.from(formulario, { y: 20, opacity: 0, duration: 0.25 }, '-=0.1');
-    }
-
-    if (cartaoTabela) {
-        tl.from(cartaoTabela, { y: 20, opacity: 0, duration: 0.25 }, '-=0.05');
-    }
 }
 
 function configurarMicroInteracoes() {
@@ -76,10 +43,12 @@ function configurarMicroInteracoes() {
 
     document.querySelectorAll('.pagina__icone').forEach(icone => {
         icone.addEventListener('mouseenter', () => {
-            gsap.to(icone, { scale: 1.1, rotation: 5, duration: 0.3, ease: 'back.out(2)' });
+            icone.style.transition = 'transform 0.3s ease';
+            icone.style.transform = 'scale(1.1) rotate(5deg)';
         });
         icone.addEventListener('mouseleave', () => {
-            gsap.to(icone, { scale: 1, rotation: 0, duration: 0.25, ease: 'power2.out' });
+            icone.style.transition = 'transform 0.25s ease';
+            icone.style.transform = 'scale(1) rotate(0deg)';
         });
     });
 
@@ -87,10 +56,12 @@ function configurarMicroInteracoes() {
         const iconEl = cartao.querySelector('.material-icons-outlined');
         if (!iconEl) return;
         cartao.addEventListener('mouseenter', () => {
-            gsap.to(iconEl, { scale: 1.15, rotation: 8, duration: 0.3, ease: 'back.out(2)' });
+            iconEl.style.transition = 'transform 0.3s ease';
+            iconEl.style.transform = 'scale(1.15) rotate(8deg)';
         });
         cartao.addEventListener('mouseleave', () => {
-            gsap.to(iconEl, { scale: 1, rotation: 0, duration: 0.25, ease: 'power2.out' });
+            iconEl.style.transition = 'transform 0.25s ease';
+            iconEl.style.transform = 'scale(1) rotate(0deg)';
         });
     });
 }

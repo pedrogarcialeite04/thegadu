@@ -26,7 +26,6 @@ export function desenharTabelaSaidas(filtro = '') {
         if (tabelaEl) tabelaEl.style.display = '';
 
         elementos.listaSaidas.innerHTML = resultado.map(saida => {
-            const indiceSaida = listaSaidas.indexOf(saida);
             return `
             <tr>
                 <td style="font-weight:400; color:var(--texto-medio)">${formatarData(saida.data)}</td>
@@ -37,7 +36,7 @@ export function desenharTabelaSaidas(filtro = '') {
                 <td>${limparHtml(saida.motivo)}</td>
                 <td>
                     <div class="acoes-tabela">
-                        <button class="botao-acao botao-acao--excluir" onclick="controle.excluirSaida(${indiceSaida})" title="Excluir">
+                        <button class="botao-acao botao-acao--excluir" onclick="controle.excluirSaida('${saida._id}')" title="Excluir">
                             <span class="material-icons-outlined">delete_outline</span>
                         </button>
                     </div>

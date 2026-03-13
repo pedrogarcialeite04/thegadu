@@ -14,6 +14,12 @@ function obterContainer() {
     return document.getElementById('notificacoes');
 }
 
+function escaparHtml(texto) {
+    const div = document.createElement('div');
+    div.textContent = texto;
+    return div.innerHTML;
+}
+
 export function mostrarNotificacao(mensagem, tipo = 'sucesso') {
     const container = obterContainer();
     if (!container) return;
@@ -26,7 +32,7 @@ export function mostrarNotificacao(mensagem, tipo = 'sucesso') {
         </div>
         <div class="notificacao__conteudo">
             <p class="notificacao__titulo">${TITULOS[tipo]}</p>
-            <p class="notificacao__texto">${mensagem}</p>
+            <p class="notificacao__texto">${escaparHtml(mensagem)}</p>
         </div>
         <button class="notificacao__fechar" aria-label="Fechar">
             <span class="material-icons-outlined">close</span>
@@ -44,16 +50,16 @@ export function mostrarNotificacao(mensagem, tipo = 'sucesso') {
 
     container.appendChild(el);
 
-    const tempo = setTimeout(fechar, 3500);
+    let tempoId = setTimeout(fechar, 3500);
     el.addEventListener('mouseenter', () => {
-        clearTimeout(tempo);
+        clearTimeout(tempoId);
         const barra = el.querySelector('.notificacao__progresso');
         if (barra) barra.style.animationPlayState = 'paused';
     });
     el.addEventListener('mouseleave', () => {
         const barra = el.querySelector('.notificacao__progresso');
         if (barra) barra.style.animationPlayState = 'running';
-        setTimeout(fechar, 1500);
+        tempoId = setTimeout(fechar, 1500);
     });
 }
 
