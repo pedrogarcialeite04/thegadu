@@ -14,10 +14,16 @@ async function iniciar() {
     iniciarModal();
     iniciarBusca();
 
-    window.controle = {
-        editar:  abrirEdicao,
-        excluir: removerProduto
-    };
+    const listaProdutosEl = document.querySelector('#listaProdutos');
+    if (listaProdutosEl) {
+        listaProdutosEl.addEventListener('click', (e) => {
+            const botao = e.target.closest('[data-acao]');
+            if (!botao) return;
+            const { acao, codigo } = botao.dataset;
+            if (acao === 'editar') abrirEdicao(codigo);
+            else if (acao === 'excluir') removerProduto(codigo);
+        });
+    }
 
     await carregarDados();
     await desenharTabelaProdutos();

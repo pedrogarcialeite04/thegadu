@@ -53,10 +53,10 @@ export async function desenharTabelaProdutos(filtro = '') {
                 <td>${formatarMoeda(produto.quantidade * produto.valor)}</td>
                 <td>
                     <div class="acoes-tabela">
-                        <button class="botao-acao" onclick="controle.editar('${produto.codigo}')" title="Editar">
+                        <button class="botao-acao" data-acao="editar" data-codigo="${produto.codigo}" title="Editar">
                             <span class="material-icons-outlined">edit</span>
                         </button>
-                        <button class="botao-acao botao-acao--excluir" onclick="controle.excluir('${produto.codigo}')" title="Excluir">
+                        <button class="botao-acao botao-acao--excluir" data-acao="excluir" data-codigo="${produto.codigo}" title="Excluir">
                             <span class="material-icons-outlined">delete_outline</span>
                         </button>
                     </div>

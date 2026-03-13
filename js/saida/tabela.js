@@ -36,7 +36,7 @@ export function desenharTabelaSaidas(filtro = '') {
                 <td>${limparHtml(saida.motivo)}</td>
                 <td>
                     <div class="acoes-tabela">
-                        <button class="botao-acao botao-acao--excluir" onclick="controle.excluirSaida('${saida._id}')" title="Excluir">
+                        <button class="botao-acao botao-acao--excluir" data-acao="excluirSaida" data-id="${saida._id}" title="Excluir">
                             <span class="material-icons-outlined">delete_outline</span>
                         </button>
                     </div>

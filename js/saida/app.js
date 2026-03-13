@@ -13,9 +13,14 @@ async function iniciar() {
     iniciarNavegacao('saida');
     iniciarBusca();
 
-    window.controle = {
-        excluirSaida: removerSaida
-    };
+    const listaSaidasEl = document.querySelector('#listaSaidas');
+    if (listaSaidasEl) {
+        listaSaidasEl.addEventListener('click', (e) => {
+            const botao = e.target.closest('[data-acao]');
+            if (!botao) return;
+            if (botao.dataset.acao === 'excluirSaida') removerSaida(botao.dataset.id);
+        });
+    }
 
     await carregarDados();
 
