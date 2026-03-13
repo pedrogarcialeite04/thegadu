@@ -6,11 +6,17 @@ async function requisicao(caminho, opcoes = {}) {
         ...opcoes
     };
 
-    if (config.body && typeof config.body === 'object') {
+    if (config.body != null && typeof config.body !== 'string') {
         config.body = JSON.stringify(config.body);
     }
 
-    const resposta = await fetch(`${BASE_URL}${caminho}`, config);
+    let resposta;
+    try {
+        resposta = await fetch(`${BASE_URL}${caminho}`, config);
+    } catch (err) {
+        throw new Error('Sem conexão com o servidor. Verifique se o backend está rodando.');
+    }
+
     const dados = await resposta.json();
 
     if (!resposta.ok) {

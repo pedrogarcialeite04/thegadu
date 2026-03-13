@@ -11,7 +11,6 @@ import { iniciarLogo3D } from '../compartilhado/logo3d.js';
 
 async function iniciar() {
     iniciarNavegacao('saida');
-    iniciarFormularioSaida();
     iniciarBusca();
 
     window.controle = {
@@ -19,6 +18,12 @@ async function iniciar() {
     };
 
     await carregarDados();
+
+    iniciarFormularioSaida();
+    iniciarSelectsCustomizados();
+
+    document.dispatchEvent(new CustomEvent('produtos-atualizados'));
+
     desenharTabelaSaidas();
     await atualizarResumo();
 
@@ -28,7 +33,6 @@ async function iniciar() {
         document.dispatchEvent(new CustomEvent('produtos-atualizados'));
     });
 
-    iniciarSelectsCustomizados();
     iniciarLogo3D();
     iniciarAnimacoes();
 }

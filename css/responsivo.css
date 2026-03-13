@@ -51,6 +51,8 @@
         font-size: 1.3rem;
     }
 
+    /* ── FORMULÁRIO MOBILE ─────────────────────────────────── */
+
     .formulario {
         padding: 20px;
     }
@@ -67,7 +69,26 @@
     .formulario__acoes .botao {
         width: 100%;
         justify-content: center;
+        min-height: 48px;
     }
+
+    .campo__entrada,
+    .campo__selecao,
+    .selecao-custom__gatilho {
+        font-size: 16px;
+        min-height: 48px;
+        padding: 14px 16px;
+    }
+
+    .campo__selecao {
+        padding-right: 40px;
+    }
+
+    .selecao-custom__busca {
+        font-size: 16px;
+    }
+
+    /* ── BUSCA MOBILE ──────────────────────────────────────── */
 
     .cartao-tabela__topo {
         flex-direction: column;
@@ -82,13 +103,66 @@
 
     .caixa-busca input {
         width: 100%;
+        font-size: 16px;
+        min-height: 36px;
     }
 
-    .tabela th,
-    .tabela td {
-        padding: 12px 14px;
-        font-size: 0.8rem;
+    /* ── TABELA MOBILE: LAYOUT CARD ────────────────────────── */
+
+    .tabela thead {
+        display: none;
     }
+
+    .tabela,
+    .tabela tbody {
+        display: block;
+        width: 100%;
+    }
+
+    .tabela tbody tr {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 16px;
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--borda-leve);
+        position: relative;
+        align-items: center;
+    }
+
+    .tabela tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    .tabela td {
+        display: block;
+        padding: 0;
+        border-bottom: none;
+        white-space: normal;
+        word-break: break-word;
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .tabela td:first-child {
+        font-size: 0.9rem;
+        width: 100%;
+        margin-bottom: 2px;
+    }
+
+    .tabela td:last-child {
+        margin-left: auto;
+    }
+
+    .acoes-tabela {
+        gap: 8px;
+    }
+
+    .botao-acao {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* ── MODAL MOBILE ──────────────────────────────────────── */
 
     .modal {
         padding: 20px;
@@ -98,6 +172,12 @@
     .modal .formulario__grade {
         grid-template-columns: 1fr;
     }
+
+    .modal .campo__entrada {
+        font-size: 16px;
+    }
+
+    /* ── NOTIFICAÇÕES MOBILE ───────────────────────────────── */
 
     .notificacoes {
         bottom: 16px;
@@ -118,10 +198,14 @@
         flex-direction: column;
     }
 
+    /* ── DESABILITAR HOVER EFFECTS ─────────────────────────── */
+
     .formulario:hover,
     .cartao-tabela:hover {
         transform: none;
     }
+
+    /* ── SELECT CUSTOMIZADO MOBILE ─────────────────────────── */
 
     .selecao-custom__opcao-icone {
         width: 32px;
@@ -134,12 +218,45 @@
     }
 
     .selecao-custom__opcao {
-        padding: 8px 10px;
+        padding: 10px 12px;
         gap: 10px;
+    }
+
+    .selecao-custom__opcao-texto {
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .selecao-custom__opcao-detalhe {
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .selecao-custom__valor {
+        white-space: normal;
+        line-height: 1.3;
+    }
+
+    /* ── BOTÃO TOUCH TARGET ────────────────────────────────── */
+
+    .botao {
+        min-height: 44px;
+        padding: 12px 20px;
+    }
+
+    .indicador-qtd {
+        font-size: 0.8rem;
+        padding: 4px 10px;
     }
 }
 
+/* ── RESPONSIVO: MOBILE PEQUENO ────────────────────────────── */
+
 @media (max-width: 480px) {
+    .conteudo-principal {
+        padding: 16px 12px;
+    }
+
     .pagina__titulo {
         font-size: 1.15rem;
     }
@@ -152,7 +269,36 @@
         padding: 16px;
     }
 
+    .formulario__grade {
+        gap: 14px;
+    }
+
     .cartao-tabela__topo {
         padding: 14px 16px;
+    }
+
+    .tabela tbody tr {
+        padding: 14px 16px;
+    }
+
+    .tabela td {
+        font-size: 0.82rem;
+    }
+
+    .tabela td:first-child {
+        font-size: 0.85rem;
+    }
+
+    .campo__rotulo {
+        font-size: 0.72rem;
+    }
+
+    .pagina__cabecalho {
+        margin-bottom: 20px;
+    }
+
+    .formulario__acoes {
+        margin-top: 20px;
+        gap: 10px;
     }
 }

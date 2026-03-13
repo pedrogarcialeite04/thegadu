@@ -101,7 +101,12 @@
     border-color: var(--azul);
     background: #fff;
     box-shadow: 0 0 0 3px var(--azul-fundo), 0 2px 8px rgba(107, 127, 215, 0.1);
-    transform: translateY(-1px);
+}
+
+@media (min-width: 769px) {
+    .campo__entrada:focus {
+        transform: translateY(-1px);
+    }
 }
 
 .campo__entrada[readonly] {

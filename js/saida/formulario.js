@@ -10,11 +10,14 @@ function atualizarSeletorSaida() {
     const listaProdutos = obterProdutos();
     const seletor = elementos.saidaCodigo;
     const valorAtual = seletor.value;
-    seletor.innerHTML = '<option value="">Selecione um produto</option>';
+
+    let html = '<option value="">Selecione um produto</option>';
     listaProdutos.forEach(p => {
         const fornecedor = p.fornecedor ? ` | ${limparHtml(p.fornecedor)}` : '';
-        seletor.innerHTML += `<option value="${limparHtml(p.codigo)}" data-descricao="${limparHtml(p.descricao)}" data-fornecedor="${limparHtml(p.fornecedor || '')}" data-qtd="${p.quantidade}">${limparHtml(p.codigo)} — ${limparHtml(p.descricao)}${fornecedor} (${p.quantidade} un.)</option>`;
+        html += `<option value="${limparHtml(p.codigo)}" data-descricao="${limparHtml(p.descricao)}" data-fornecedor="${limparHtml(p.fornecedor || '')}" data-qtd="${p.quantidade}">${limparHtml(p.codigo)} — ${limparHtml(p.descricao)}${fornecedor} (${p.quantidade} un.)</option>`;
     });
+    seletor.innerHTML = html;
+
     if (valorAtual) seletor.value = valorAtual;
 }
 
