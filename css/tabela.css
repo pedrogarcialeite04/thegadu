@@ -1,0 +1,288 @@
+/* ── TABELA ─────────────────────────────────────────────────── */
+
+.cartao-tabela {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--raio-grande);
+    overflow: hidden;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.15),
+        0 1px 2px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.cartao-tabela::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: var(--raio-grande);
+    padding: 1px;
+    background: linear-gradient(
+        135deg,
+        rgba(107, 127, 215, 0) 0%,
+        rgba(107, 127, 215, 0) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: background 0.4s ease;
+}
+
+.cartao-tabela:hover::after {
+    background: linear-gradient(
+        135deg,
+        rgba(107, 127, 215, 0.4) 0%,
+        rgba(143, 160, 232, 0.15) 50%,
+        rgba(107, 127, 215, 0.4) 100%
+    );
+}
+
+.cartao-tabela:hover {
+    box-shadow:
+        0 16px 48px rgba(107, 127, 215, 0.12),
+        0 4px 12px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+.cartao-tabela__topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--borda-leve);
+}
+
+.cartao-tabela__titulo {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--texto-forte);
+}
+
+.caixa-busca {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: var(--fundo-campo);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio-pequeno);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.caixa-busca:hover:not(:focus-within) {
+    border-color: var(--azul-borda);
+}
+
+.caixa-busca:focus-within {
+    border-color: var(--azul);
+    box-shadow: 0 0 0 3px var(--azul-fundo);
+}
+
+.caixa-busca .material-icons-outlined {
+    font-size: 18px;
+    color: var(--texto-fraco);
+    transition: color 0.2s ease;
+}
+
+.caixa-busca:focus-within .material-icons-outlined {
+    color: var(--azul);
+}
+
+.caixa-busca input {
+    border: none;
+    background: transparent;
+    color: var(--texto-forte);
+    font-family: inherit;
+    font-size: 0.85rem;
+    outline: none;
+    width: 200px;
+}
+
+.caixa-busca input::placeholder {
+    color: var(--texto-fraco);
+}
+
+.cartao-tabela__corpo {
+    overflow-x: auto;
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela thead tr {
+    border-bottom: 1px solid var(--borda);
+    background: var(--fundo-pagina);
+}
+
+.tabela th {
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--texto-fraco);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+}
+
+.tabela td {
+    padding: 16px 20px;
+    font-size: 0.88rem;
+    color: var(--texto-medio);
+    border-bottom: 1px solid var(--borda-leve);
+    white-space: nowrap;
+}
+
+.tabela tbody tr {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tabela tbody tr:hover {
+    background: linear-gradient(90deg, rgba(107, 127, 215, 0.04), rgba(143, 160, 232, 0.02));
+}
+
+.tabela tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.tabela td:first-child {
+    font-weight: 600;
+    color: var(--azul-escuro);
+    font-family: 'Inter', monospace;
+    letter-spacing: 0.5px;
+}
+
+.acoes-tabela {
+    display: flex;
+    gap: 6px;
+}
+
+.botao-acao {
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--borda);
+    border-radius: var(--raio-pequeno);
+    background: transparent;
+    color: var(--texto-fraco);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.botao-acao .material-icons-outlined {
+    font-size: 17px;
+    transition: transform 0.25s ease;
+}
+
+.botao-acao:hover {
+    background: var(--azul-fundo);
+    color: var(--azul);
+    border-color: var(--azul-borda);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 127, 215, 0.15);
+}
+
+.botao-acao:hover .material-icons-outlined {
+    transform: scale(1.1);
+}
+
+.botao-acao:active {
+    transform: translateY(0) scale(0.95);
+}
+
+.botao-acao--excluir:hover {
+    background: var(--laranja-fundo);
+    color: var(--laranja);
+    border-color: var(--laranja-borda);
+    box-shadow: 0 4px 12px rgba(232, 89, 58, 0.15);
+}
+
+/* ── INDICADOR DE QUANTIDADE ────────────────────────────────── */
+
+.indicador-qtd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.82rem;
+    transition: all 0.25s ease;
+}
+
+.indicador-qtd--alto {
+    background: var(--verde-fundo);
+    color: var(--verde);
+}
+
+.indicador-qtd--medio {
+    background: var(--amarelo-fundo);
+    color: var(--amarelo);
+}
+
+.indicador-qtd--baixo {
+    background: var(--laranja-fundo);
+    color: var(--laranja);
+}
+
+.tabela tbody tr:hover .indicador-qtd--alto {
+    box-shadow: 0 0 12px rgba(26, 175, 93, 0.2);
+}
+
+.tabela tbody tr:hover .indicador-qtd--medio {
+    box-shadow: 0 0 12px rgba(240, 180, 41, 0.2);
+}
+
+.tabela tbody tr:hover .indicador-qtd--baixo {
+    box-shadow: 0 0 12px rgba(232, 89, 58, 0.2);
+}
+
+/* ── ESTADO VAZIO ───────────────────────────────────────────── */
+
+.estado-vazio {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.estado-vazio.visivel {
+    display: flex;
+}
+
+.estado-vazio .material-icons-outlined {
+    font-size: 48px;
+    color: var(--azul-claro);
+    opacity: 0.4;
+    margin-bottom: 16px;
+    animation: estadoVazioPulso 3s ease-in-out infinite;
+}
+
+@keyframes estadoVazioPulso {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50%      { transform: scale(1.05); opacity: 0.6; }
+}
+
+.estado-vazio p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--texto-medio);
+    margin-bottom: 4px;
+}
+
+.estado-vazio span {
+    font-size: 0.82rem;
+    color: var(--texto-fraco);
+}

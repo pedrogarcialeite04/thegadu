@@ -1,0 +1,25 @@
+# Dependências
+backend/node_modules/
+node_modules/
+
+# Variáveis de ambiente
+backend/.env
+.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Cursor
+.cursor/

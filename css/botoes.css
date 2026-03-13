@@ -1,0 +1,92 @@
+/* ── BOTÕES ─────────────────────────────────────────────────── */
+
+.botao {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 1px solid var(--borda);
+    border-radius: var(--raio-pequeno);
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.botao::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.25) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.botao:hover::after {
+    opacity: 1;
+}
+
+.botao .material-icons-outlined {
+    font-size: 18px;
+    transition: transform 0.25s ease;
+}
+
+.botao:hover .material-icons-outlined {
+    transform: scale(1.1);
+}
+
+.botao:active {
+    transform: scale(0.97);
+}
+
+.botao--principal {
+    background: var(--azul);
+    color: #fff;
+    border-color: var(--azul);
+}
+
+.botao--principal:hover {
+    background: var(--azul-escuro);
+    border-color: var(--azul-escuro);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(107, 127, 215, 0.35), 0 0 0 1px rgba(107, 127, 215, 0.2);
+}
+
+.botao--principal:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 2px 8px rgba(107, 127, 215, 0.2);
+}
+
+.botao--neutro {
+    background: transparent;
+    color: var(--texto-medio);
+}
+
+.botao--neutro:hover {
+    background: var(--fundo-campo);
+    color: var(--texto-forte);
+    transform: translateY(-1px);
+}
+
+.botao--perigo {
+    background: var(--laranja);
+    color: #fff;
+    border-color: var(--laranja);
+}
+
+.botao--perigo:hover {
+    background: var(--laranja-claro);
+    border-color: var(--laranja-claro);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(232, 89, 58, 0.35), 0 0 0 1px rgba(232, 89, 58, 0.2);
+}
+
+.botao--perigo:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 2px 8px rgba(232, 89, 58, 0.2);
+}

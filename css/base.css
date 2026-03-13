@@ -1,0 +1,76 @@
+/* ── RESET ──────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ── VARIÁVEIS ──────────────────────────────────────────────── */
+
+:root {
+    --azul: #6B7FD7;
+    --azul-claro: #8FA0E8;
+    --azul-escuro: #4F63B8;
+    --azul-fundo: rgba(107, 127, 215, 0.08);
+    --azul-borda: rgba(107, 127, 215, 0.20);
+
+    --laranja: #E8593A;
+    --laranja-claro: #F07A60;
+    --laranja-fundo: rgba(232, 89, 58, 0.08);
+    --laranja-borda: rgba(232, 89, 58, 0.25);
+
+    --verde: #1AAF5D;
+    --verde-fundo: rgba(26, 175, 93, 0.10);
+    --verde-borda: rgba(26, 175, 93, 0.25);
+
+    --amarelo: #F0B429;
+    --amarelo-fundo: rgba(240, 180, 41, 0.10);
+    --amarelo-borda: rgba(240, 180, 41, 0.25);
+
+    --fundo-pagina: #F5F6FA;
+    --fundo-menu: #FFFFFF;
+    --fundo-cartao: #FFFFFF;
+    --fundo-cartao-hover: #FAFBFF;
+    --fundo-campo: #F0F1F6;
+
+    --borda: #E2E4ED;
+    --borda-leve: #ECEEF5;
+
+    --texto-forte: #1A1D2E;
+    --texto-medio: #5A5E73;
+    --texto-fraco: #9497AB;
+
+    --raio-pequeno: 8px;
+    --raio-medio: 12px;
+    --raio-grande: 16px;
+    --sombra: 0 1px 3px rgba(26, 29, 46, 0.06), 0 1px 2px rgba(26, 29, 46, 0.04);
+    --sombra-elevada: 0 8px 32px rgba(26, 29, 46, 0.12);
+    --transicao: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --largura-menu: 264px;
+    --altura-cabecalho-mobile: 60px;
+}
+
+html { font-size: 14px; }
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--fundo-pagina);
+    color: var(--texto-forte);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ── SCROLLBAR OCULTA ──────────────────────────────────────── */
+
+* {
+    scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

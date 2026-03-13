@@ -1,0 +1,103 @@
+/* ── CONTEÚDO PRINCIPAL ─────────────────────────────────────── */
+
+.conteudo-principal {
+    flex: 1;
+    margin-left: var(--largura-menu);
+    padding: 32px 40px;
+    min-height: 100vh;
+    position: relative;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8, 8, 14, 0.92) 0%,
+            rgba(15, 17, 30, 0.88) 25%,
+            rgba(26, 29, 46, 0.82) 55%,
+            rgba(40, 50, 90, 0.75) 100%
+        ),
+        url('../imagens/download.jfif') center / cover no-repeat fixed;
+}
+
+.pagina {
+    display: none;
+    position: relative;
+}
+
+.pagina.ativo {
+    display: block;
+    animation: paginaEntrar 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes paginaEntrar {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── CABEÇALHO DA PÁGINA ────────────────────────────────────── */
+
+.pagina__cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.pagina__titulo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.pagina__subtitulo {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+.pagina__icone {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--raio-medio);
+    background: rgba(107, 127, 215, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(107, 127, 215, 0.3);
+    flex-shrink: 0;
+    cursor: default;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pagina__icone:hover {
+    box-shadow: 0 0 24px rgba(107, 127, 215, 0.25);
+    border-color: rgba(107, 127, 215, 0.5);
+}
+
+.pagina__icone .material-icons-outlined {
+    font-size: 22px;
+    color: var(--azul-claro);
+    transition: all 0.3s ease;
+}
+
+.pagina__icone--saida {
+    background: rgba(232, 89, 58, 0.2);
+    border-color: rgba(232, 89, 58, 0.3);
+}
+
+.pagina__icone--saida:hover {
+    box-shadow: 0 0 24px rgba(232, 89, 58, 0.25);
+    border-color: rgba(232, 89, 58, 0.5);
+}
+
+.pagina__icone--saida .material-icons-outlined {
+    color: var(--laranja-claro);
+}

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THêGADü — Registrar Produtos</title>
+    <link rel="icon" type="image/png" sizes="128x128" href="imagens/imgthegadu.PNG">
+    <link rel="shortcut icon" href="imagens/imgthegadu.PNG">
+    <link rel="apple-touch-icon" href="imagens/imgthegadu.PNG">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/menu-lateral.css">
+    <link rel="stylesheet" href="css/cabecalho.css">
+    <link rel="stylesheet" href="css/conteudo.css">
+    <link rel="stylesheet" href="css/formulario.css">
+    <link rel="stylesheet" href="css/botoes.css">
+    <link rel="stylesheet" href="css/tabela.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/notificacoes.css">
+    <link rel="stylesheet" href="css/responsivo.css">
+</head>
+<body>
+
+    <!-- MENU LATERAL -->
+    <aside class="menu-lateral" id="menuLateral">
+        <div class="menu-lateral__topo">
+            <div class="logo3d-container" id="logo3dContainer">
+                <canvas id="logo3dCanvas"></canvas>
+            </div>
+        </div>
+
+        <nav class="menu-lateral__navegacao">
+            <button class="menu-lateral__botao ativo" data-secao="entrada">
+                <span class="material-icons-outlined">add_circle_outline</span>
+                <span class="menu-lateral__botao-texto">Registrar Produtos</span>
+            </button>
+            <button class="menu-lateral__botao" data-secao="saida">
+                <span class="material-icons-outlined">remove_circle_outline</span>
+                <span class="menu-lateral__botao-texto">Registrar Saída</span>
+            </button>
+        </nav>
+
+        <div class="menu-lateral__resumo">
+            <div class="cartao-resumo">
+                <span class="material-icons-outlined">inventory_2</span>
+                <div>
+                    <p class="cartao-resumo__rotulo">Total em Estoque</p>
+                    <p class="cartao-resumo__valor" id="totalPecas">0</p>
+                </div>
+            </div>
+            <div class="cartao-resumo">
+                <span class="material-icons-outlined">attach_money</span>
+                <div>
+                    <p class="cartao-resumo__rotulo">Valor Total</p>
+                    <p class="cartao-resumo__valor" id="valorTotalEstoque">R$ 0,00</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- OVERLAY MOBILE -->
+    <div class="menu-lateral__fundo" id="fundoMenu"></div>
+
+    <!-- HEADER MOBILE -->
+    <header class="cabecalho-mobile" id="cabecalhoMobile">
+        <button class="cabecalho-mobile__hamburguer" id="botaoMenu">
+            <span class="material-icons-outlined">menu</span>
+        </button>
+        <img src="imagens/imgthegadu-removebg-preview.png" alt="THêGADü" class="cabecalho-mobile__logo">
+        <div class="cabecalho-mobile__espacador"></div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="conteudo-principal">
+        <section class="pagina ativo" id="paginaEntrada">
+            <div class="pagina__cabecalho">
+                <div>
+                    <h2 class="pagina__titulo">Registrar Produtos</h2>
+                    <p class="pagina__subtitulo">Adicione novos itens ao estoque da THêGADü</p>
+                </div>
+                <div class="pagina__icone">
+                    <span class="material-icons-outlined">storefront</span>
+                </div>
+            </div>
+
+            <form class="formulario" id="formularioEntrada">
+                <div class="formulario__grade">
+                    <div class="campo">
+                        <label class="campo__rotulo" for="entradaCodigo">Código do Produto</label>
+                        <input class="campo__entrada" type="text" id="entradaCodigo" placeholder="Ex: TG-0001" required>
+                    </div>
+                    <div class="campo">
+                        <label class="campo__rotulo" for="entradaDescricao">Descrição do Produto</label>
+                        <input class="campo__entrada" type="text" id="entradaDescricao" placeholder="Ex: Camiseta Oversized Preta" required>
+                    </div>
+                    <div class="campo">
+                        <label class="campo__rotulo" for="entradaFornecedor">Fornecedor</label>
+                        <input class="campo__entrada" type="text" id="entradaFornecedor" placeholder="Ex: Distribuidora ABC">
+                    </div>
+                    <div class="campo">
+                        <label class="campo__rotulo" for="entradaQuantidade">Quantidade</label>
+                        <input class="campo__entrada" type="number" id="entradaQuantidade" placeholder="0" min="1" required>
+                    </div>
+                    <div class="campo">
+                        <label class="campo__rotulo" for="entradaValor">Valor Unitário (R$)</label>
+                        <input class="campo__entrada" type="number" id="entradaValor" placeholder="0,00" step="0.01" min="0.01" required>
+                    </div>
+                </div>
+                <div class="formulario__acoes">
+                    <button type="reset" class="botao botao--neutro">
+                        <span class="material-icons-outlined">restart_alt</span>
+                        Limpar
+                    </button>
+                    <button type="submit" class="botao botao--principal">
+                        <span class="material-icons-outlined">add</span>
+                        Adicionar ao Estoque
+                    </button>
+                </div>
+            </form>
+
+            <div class="cartao-tabela">
+                <div class="cartao-tabela__topo">
+                    <h3 class="cartao-tabela__titulo">Produtos em Estoque</h3>
+                    <div class="caixa-busca">
+                        <span class="material-icons-outlined">search</span>
+                        <input type="text" id="buscaProdutos" placeholder="Buscar produto...">
+                    </div>
+                </div>
+                <div class="cartao-tabela__corpo">
+                    <table class="tabela" id="tabelaProdutos">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Fornecedor</th>
+                                <th>Qtd</th>
+                                <th>Valor Unit.</th>
+                                <th>Valor Total</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaProdutos"></tbody>
+                    </table>
+                    <div class="estado-vazio" id="vazioEstoque">
+                        <span class="material-icons-outlined">inventory</span>
+                        <p>Nenhum produto cadastrado</p>
+                        <span>Adicione produtos usando o formulário acima</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL EDIÇÃO -->
+    <div class="modal-fundo" id="modalFundo">
+        <div class="modal">
+            <div class="modal__cabecalho">
+                <h3 class="modal__titulo">Editar Produto</h3>
+                <button class="modal__fechar" id="modalFechar">
+                    <span class="material-icons-outlined">close</span>
+                </button>
+            </div>
+            <form id="formularioEdicao">
+                <div class="formulario__grade">
+                    <div class="campo">
+                        <label class="campo__rotulo" for="edicaoCodigo">Código do Produto</label>
+                        <input class="campo__entrada" type="text" id="edicaoCodigo" readonly>
+                    </div>
+                    <div class="campo">
+                        <label class="campo__rotulo" for="edicaoDescricao">Descrição</label>
+                        <input class="campo__entrada" type="text" id="edicaoDescricao" required>
+                    </div>
+                    <div class="campo">
+                        <label class="campo__rotulo" for="edicaoFornecedor">Fornecedor</label>
+                        <input class="campo__entrada" type="text" id="edicaoFornecedor">
+                    </div>
+                    <div class="campo">
+                        <label class="campo__rotulo" for="edicaoQuantidade">Quantidade</label>
+                        <input class="campo__entrada" type="number" id="edicaoQuantidade" min="0" required>
+                    </div>
+                    <div class="campo">
+                        <label class="campo__rotulo" for="edicaoValor">Valor Unitário (R$)</label>
+                        <input class="campo__entrada" type="number" id="edicaoValor" step="0.01" min="0.01" required>
+                    </div>
+                </div>
+                <div class="formulario__acoes">
+                    <button type="button" class="botao botao--neutro" id="botaoCancelarEdicao">Cancelar</button>
+                    <button type="submit" class="botao botao--principal">
+                        <span class="material-icons-outlined">save</span>
+                        Salvar Alterações
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- NOTIFICAÇÕES -->
+    <div class="notificacoes" id="notificacoes"></div>
+
+    <!-- Three.js -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160/build/three.min.js"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+    <script type="module" src="js/entrada/app.js"></script>
+</body>
+</html>

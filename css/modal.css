@@ -1,0 +1,106 @@
+/* ── MODAL ──────────────────────────────────────────────────── */
+
+.modal-fundo {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 8, 14, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-fundo.visivel {
+    display: flex;
+    animation: modalFundoEntrar 0.3s ease forwards;
+}
+
+@keyframes modalFundoEntrar {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.modal {
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--raio-grande);
+    width: 100%;
+    max-width: 540px;
+    padding: 28px;
+    box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.2),
+        0 8px 24px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    animation: modalSurgir 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.modal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 24px;
+    right: 24px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--azul), var(--azul-claro), var(--azul));
+    border-radius: 0 0 4px 4px;
+    opacity: 0.7;
+}
+
+@keyframes modalSurgir {
+    from {
+        opacity: 0;
+        transform: scale(0.88) translateY(20px);
+        filter: blur(4px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0);
+    }
+}
+
+.modal__cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.modal__titulo {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--texto-forte);
+}
+
+.modal__fechar {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--borda);
+    border-radius: var(--raio-pequeno);
+    background: transparent;
+    color: var(--texto-fraco);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal__fechar .material-icons-outlined {
+    transition: transform 0.25s ease;
+}
+
+.modal__fechar:hover {
+    background: var(--laranja-fundo);
+    color: var(--laranja);
+    border-color: var(--laranja-borda);
+    transform: rotate(90deg);
+}
