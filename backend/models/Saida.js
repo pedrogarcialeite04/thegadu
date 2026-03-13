@@ -38,6 +38,11 @@ const saidaSchema = new mongoose.Schema({
             message: 'Quantidade deve ser um número inteiro'
         }
     },
+    valor: {
+        type: Number,
+        min: [0, 'Valor não pode ser negativo'],
+        default: 0
+    },
     motivo: {
         type: String,
         required: [true, 'Motivo da saída é obrigatório'],

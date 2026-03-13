@@ -1,6 +1,6 @@
 import { obterProdutos, obterSaidas, excluirProdutoAPI, excluirSaidaAPI } from './estado.js';
 import { mostrarNotificacao, mostrarConfirmacao } from './notificacoes.js';
-import { desenharTabelaProdutos } from '../entrada/tabela.js';
+import { desenharTabelaProdutos, atualizarResumo } from '../entrada/tabela.js';
 import { desenharTabelaSaidas } from '../saida/tabela.js';
 
 export async function removerProduto(codigo) {
@@ -36,9 +36,12 @@ export async function removerSaida(id) {
 
     if (confirmado) {
         try {
-            await excluirSaidaAPI(id);
-            await desenharTabelaSaidas();
-            mostrarNotificacao('Registro de saída excluído', 'erro');
+            const resposta = await excluirSaidaAPI(id);
+            desenharTabelaSaidas();
+            await atualizarResumo();
+            document.dispatchEvent(new CustomEvent('produtos-atualizados'));
+            const msg = resposta.mensagem || 'Registro de saída excluído';
+            mostrarNotificacao(msg, 'sucesso');
         } catch (erro) {
             mostrarNotificacao(erro.message || 'Erro ao excluir registro', 'erro');
         }

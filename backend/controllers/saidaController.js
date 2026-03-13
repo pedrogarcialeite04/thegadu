@@ -59,6 +59,7 @@ async function registrarSaida(req, res, next) {
                 descricao: produto.descricao,
                 fornecedor: produto.fornecedor || '',
                 quantidade: qtdSaida,
+                valor: produto.valor,
                 motivo: sanitizarString(motivo, 100),
                 data: new Date()
             });
@@ -100,29 +101,70 @@ async function registrarSaida(req, res, next) {
 }
 
 async function excluirSaida(req, res, next) {
+    const session = await mongoose.startSession();
+
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            session.endSession();
             return res.status(400).json({
                 sucesso: false,
                 mensagem: 'ID de saída inválido'
             });
         }
 
-        const saida = await Saida.findByIdAndDelete(req.params.id);
+        let saidaExcluida;
+        let estoqueRestaurado = false;
 
-        if (!saida) {
-            return res.status(404).json({
-                sucesso: false,
-                mensagem: 'Registro de saída não encontrado'
-            });
-        }
+        await session.withTransaction(async () => {
+            const saida = await Saida.findByIdAndDelete(req.params.id).session(session);
+
+            if (!saida) {
+                throw { statusCode: 404, mensagem: 'Registro de saída não encontrado' };
+            }
+
+            saidaExcluida = saida;
+
+            const produto = await Produto.findOne({ codigo: saida.codigo }).session(session);
+
+            if (produto) {
+                produto.quantidade += saida.quantidade;
+                await produto.save({ session });
+                estoqueRestaurado = true;
+            } else if (saida.valor && saida.valor > 0) {
+                const novoProduto = new Produto({
+                    codigo: saida.codigo,
+                    descricao: saida.descricao,
+                    fornecedor: saida.fornecedor || '',
+                    quantidade: saida.quantidade,
+                    valor: saida.valor
+                });
+                await novoProduto.save({ session });
+                estoqueRestaurado = true;
+            }
+        });
+
+        session.endSession();
+
+        const mensagem = estoqueRestaurado
+            ? `Saída excluída e ${saidaExcluida.quantidade} un. restauradas ao estoque de "${saidaExcluida.codigo}"`
+            : 'Registro de saída excluído';
 
         res.json({
             sucesso: true,
-            mensagem: 'Registro de saída excluído',
-            dados: saida
+            mensagem,
+            dados: saidaExcluida,
+            estoqueRestaurado
         });
     } catch (erro) {
+        session.endSession();
+
+        if (erro.statusCode) {
+            return res.status(erro.statusCode).json({
+                sucesso: false,
+                mensagem: erro.mensagem
+            });
+        }
+
         next(erro);
     }
 }

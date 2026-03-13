@@ -65,7 +65,7 @@ export async function registrarSaidaAPI(dados) {
 
 export async function excluirSaidaAPI(id) {
     const resposta = await apiSaidas.excluir(id);
-    await carregarSaidas();
+    await Promise.all([carregarProdutos(), carregarSaidas()]);
     return resposta;
 }
 
