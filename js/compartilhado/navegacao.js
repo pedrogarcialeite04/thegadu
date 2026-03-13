@@ -1,5 +1,11 @@
 import { elementos } from './seletores.js';
 
+const MOBILE_BREAKPOINT = 768;
+
+function isMobile() {
+    return window.innerWidth <= MOBILE_BREAKPOINT;
+}
+
 export function fecharMenu() {
     if (!elementos.menuLateral) return;
     elementos.menuLateral.classList.remove('aberto');
@@ -14,7 +20,18 @@ function abrirMenu() {
     document.body.style.overflow = 'hidden';
 }
 
+function habilitarTransicao() {
+    if (!elementos.menuLateral) return;
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            elementos.menuLateral.classList.add('com-transicao');
+        });
+    });
+}
+
 export function iniciarNavegacao(paginaAtual) {
+    fecharMenu();
+
     elementos.botoesMenu.forEach(botao => {
         const secao = botao.dataset.secao;
 
@@ -35,6 +52,29 @@ export function iniciarNavegacao(paginaAtual) {
         });
     });
 
-    if (elementos.botaoMenu) elementos.botaoMenu.addEventListener('click', abrirMenu);
-    if (elementos.fundoMenu) elementos.fundoMenu.addEventListener('click', fecharMenu);
+    if (elementos.botaoMenu) {
+        elementos.botaoMenu.addEventListener('click', abrirMenu);
+    }
+
+    if (elementos.botaoFecharMenu) {
+        elementos.botaoFecharMenu.addEventListener('click', fecharMenu);
+    }
+
+    if (elementos.fundoMenu) {
+        elementos.fundoMenu.addEventListener('click', fecharMenu);
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && elementos.menuLateral?.classList.contains('aberto')) {
+            fecharMenu();
+        }
+    });
+
+    window.addEventListener('resize', () => {
+        if (!isMobile() && elementos.menuLateral?.classList.contains('aberto')) {
+            fecharMenu();
+        }
+    });
+
+    habilitarTransicao();
 }

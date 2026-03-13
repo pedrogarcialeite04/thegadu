@@ -5,6 +5,7 @@ export const elementos = {
     botoesMenu:        pegarTodos('.menu-lateral__botao'),
     menuLateral:       pegar('#menuLateral'),
     botaoMenu:         pegar('#botaoMenu'),
+    botaoFecharMenu:   pegar('#botaoFecharMenu'),
     fundoMenu:         pegar('#fundoMenu'),
     formularioEntrada: pegar('#formularioEntrada'),
     formularioSaida:   pegar('#formularioSaida'),

@@ -19,12 +19,25 @@
 @media (max-width: 768px) {
     .menu-lateral {
         transform: translateX(-100%);
+        visibility: hidden;
+        pointer-events: none;
         box-shadow: none;
+    }
+
+    .menu-lateral.com-transicao {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    visibility 0.3s;
     }
 
     .menu-lateral.aberto {
         transform: translateX(0);
+        visibility: visible;
+        pointer-events: auto;
         box-shadow: var(--sombra-elevada);
+    }
+
+    .menu-lateral__fechar {
+        display: flex;
     }
 
     .cabecalho-mobile {
