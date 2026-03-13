@@ -4,8 +4,6 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
-const mongoSanitize = require('express-mongo-sanitize');
-const hpp = require('hpp');
 const path = require('path');
 const conectarBanco = require('./config/database');
 const errorHandler = require('./middlewares/errorHandler');
@@ -90,18 +88,22 @@ app.use('/api/', limitadorGeral);
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 
-// --- SEGURANÇA: Sanitização contra NoSQL Injection ---
-app.use(mongoSanitize({
-    replaceWith: '_',
-    onSanitize: ({ req, key }) => {
-        console.warn(`[SEGURANÇA] Tentativa de NoSQL Injection bloqueada - ${key} em ${req.originalUrl}`);
+// --- SEGURANÇA: Sanitização contra NoSQL Injection (compatível com Express 5) ---
+app.use((req, _res, next) => {
+    function sanitizar(obj) {
+        if (typeof obj !== 'object' || obj === null) return obj;
+        for (const chave of Object.keys(obj)) {
+            if (chave.startsWith('$') || chave.includes('.')) {
+                delete obj[chave];
+            } else if (typeof obj[chave] === 'object') {
+                sanitizar(obj[chave]);
+            }
+        }
+        return obj;
     }
-}));
-
-// --- SEGURANÇA: Proteção contra HTTP Parameter Pollution ---
-app.use(hpp({
-    whitelist: ['busca']
-}));
+    if (req.body) sanitizar(req.body);
+    next();
+});
 
 // --- SEGURANÇA: Ocultar tecnologia do servidor ---
 app.disable('x-powered-by');
@@ -188,7 +190,7 @@ async function iniciar() {
     app.listen(PORT, () => {
         console.log(`\n🚀 Servidor THêGADü rodando na porta ${PORT}`);
         console.log(`📦 API disponível em /api`);
-        console.log(`🔒 Segurança: Helmet, Rate Limit, NoSQL Sanitize, HPP ativos\n`);
+        console.log(`🔒 Segurança: Helmet, CORS, Rate Limit, NoSQL Sanitize ativos\n`);
     });
 }
 
